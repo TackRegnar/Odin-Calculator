@@ -208,6 +208,26 @@ function main() {
       }
     }
   });
+  //the clear buttons
+  let c = document.getElementById("clear");
+  let ac = document.getElementById("allclear");
+
+  c.addEventListener('click', () => {
+    can_clear = true
+    input.textContent = "0";
+  });
+
+  ac.addEventListener('click', () => {
+    num1 = 0;
+    num2 = 0;
+    is_first_num = true;
+    total = 0;
+    disable_ops = true;
+    can_clear = true;
+    disable_equals = true;
+    input.textContent = "0";
+  });
+
 }
 
 
