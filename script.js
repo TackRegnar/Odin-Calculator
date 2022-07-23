@@ -29,13 +29,14 @@ function operate(op, num1, num2) {
 }
 
 function main() {
-  let num1 = 0;
+  //variables
+  let num1 = 0; //the numbers to be sent to operate function.
   let num2 = 0;
-  let is_first_num = true;
-  let total = 0;
-  let disable_ops = true;
-  let can_clear = true;
-  let disable_equals = true;
+  let is_first_num = true; //used to check if the input number should be num1 or num2.
+  let total = 0; // stores the number that will be added to the "display".
+  let disable_ops = true; //disables the ops buttons until a number button is hit.
+  let can_clear = true; //toggles when first number is clicked. to remove the default 0.
+
   //number buttons
   let input = document.getElementsByClassName("input")[0];
   let n0 = document.getElementById("n0");
@@ -49,6 +50,7 @@ function main() {
   let n8 = document.getElementById("n8");
   let n9 = document.getElementById("n9");
 
+  //Event Listeners
   n0.addEventListener('click', () => {
     can_clear = clear_input(can_clear);
     input.textContent += "0";
@@ -128,6 +130,7 @@ function main() {
         is_first_num = false;
         can_clear = true;
         op = "add";
+        disable_ops = true;
       } else {
         num2 = Number(input.textContent);
         total = operate(op, num1, num2);
@@ -135,6 +138,7 @@ function main() {
         can_clear = true;
         num1 = total;
         op = "add";
+        disable_ops = true;
       }
     }
   });
@@ -147,6 +151,7 @@ function main() {
         is_first_num = false;
         can_clear = true;
         op = "subtract";
+        disable_ops = true;
       } else {
         num2 = Number(input.textContent);
         total = operate(op, num1, num2);
@@ -154,6 +159,7 @@ function main() {
         can_clear = true;
         num1 = total;
         op = "subtract";
+        disable_ops = true;
       }
     }
   });
@@ -166,6 +172,7 @@ function main() {
         is_first_num = false;
         can_clear = true;
         op = "multiply";
+        disable_ops = true;
       } else {
         num2 = Number(input.textContent);
         total = operate(op, num1, num2);
@@ -173,6 +180,7 @@ function main() {
         can_clear = true;
         num1 = total;
         op = "multiply";
+        disable_ops = true;
       }
     }
   });
@@ -185,31 +193,36 @@ function main() {
         is_first_num = false;
         can_clear = true;
         op = "divide";
+        disable_ops = true;
       } else {
         num2 = Number(input.textContent);
         total = operate(op, num1, num2);
         input.textContent = total;
+        can_clear = true;
+        num1 = total;
+        op = "divide";
+        disable_ops = true;
       }
-      can_clear = true;
-      num1 = total;
-      op = "divide";
     }
   });
 
   //= button
   o5.addEventListener('click', () => {
     if (disable_ops === false) {
-      if (disable_equals === false) {
-        num2 = Number(input.textContent);
-        total = operate(op, num1, num2);
-        total = operate(op, num1, num2);
-        input.textContent = total;
-        can_clear = true;
-        is_first_num = true;
-        disable_equals = true;
-      }
+      num2 = Number(input.textContent);
+      total = operate(op, num1, num2);
+      total = operate(op, num1, num2);
+      input.textContent = total;
+      can_clear = true;
+      is_first_num = true;
+      disable_ops = true;
     }
   });
+
+  // . decimal button
+  //TODO
+
+
   //the clear buttons
   let c = document.getElementById("clear");
   let ac = document.getElementById("allclear");
@@ -233,7 +246,7 @@ function main() {
 }
 
 
-//clears the input block if its the last total or the default 0.
+//clears the input block if can_clear is true.
 function clear_input(can_clear) {
   let input = document.getElementsByClassName("input")[0];
   if (can_clear === true) {
