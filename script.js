@@ -21,6 +21,8 @@ function operate(op, num1, num2) {
     return subtracter(num1, num2);
   } else if (op === "multiply") {
     return multiplyer(num1, num2);
+  } else if (op === "divide" && num2 === 0) {
+    return "You can't devide by zero...";
   } else if (op === "divide") {
     return divider(num1, num2);
   }
@@ -187,10 +189,10 @@ function main() {
         num2 = Number(input.textContent);
         total = operate(op, num1, num2);
         input.textContent = total;
-        can_clear = true;
-        num1 = total;
-        op = "divide";
       }
+      can_clear = true;
+      num1 = total;
+      op = "divide";
     }
   });
 
